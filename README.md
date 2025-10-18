@@ -2,10 +2,11 @@
 Smart Remote for Vintage Pioneer Amps
  
  
-### Bring your classic audio gear into the smart home era
+### Bring your classic audio gear into the smart home era with EspHome
 
-Many vintage Pioneer amplifiers have lost their original remote controls over time — but they still deserve modern convenience. This project offers a **smart ESP32-based replacement** that allows you to control your beloved Pioneer amp directly from **Home Assistant** or **any smart home platform**.
+ 
 
+Many vintage Pioneer amplifiers have lost their original remote controls — but they still deserve modern convenience. VintagePioneerIR is an ESP32-based smart remote replacement that integrates seamlessly with Home Assistant using ESPHome. Control your beloved Pioneer amp (and many others) directly from your smart home setup.
 ***
 
 ## ✨ Features
@@ -29,7 +30,7 @@ Many vintage Pioneer amplifiers have lost their original remote controls over ti
 
 ## ⚙️ Installation
 
-1. Flash the provided firmware to your ESP32 (instructions in `/firmware` folder).
+1. Flash the provided ESPHome-firmware to your ESP32 (instructions in `/firmware` folder).
 2. Connect the IR LED to the appropriate GPIO pins (see wiring diagram).
 3. Configure your Wi-Fi and Home Assistant integration.
 4. Restart your ESP32 — it will appear as a new device in Home Assistant.
