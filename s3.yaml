@@ -1,0 +1,135 @@
+esphome:
+  name: s3
+  friendly_name: S3    
+  # S3  https://community-assets.home-assistant.io/original/4X/d/1/6/d16e13aa65ed79b1f334cbc189ba8fd55ac2c5d9.jpeg
+   #   worth mentioning https://gathering.tweakers.net/forum/list_messages/1531462
+ 
+#Pioneer a702r remote controls
+#TESTED OKAY ON a702r
+#AMPLIFIER AMP POWER   Switches the amplifier power ON/STANDBY. 
+#VOLUME + : Increases the volume. 
+#VOLUME — : Decreases the volume. 
+#MUTING : Press to reduce the sound —20 dB, and press again to return to the original volume level. 
+
+#TO BE TESTED #(INPUT SELECTOR buttons) 
+#TAPE 2 : TAPE 2 
+#TAPE 1 : TAPE 1/DAT 
+#CD : CD 
+#LINE : LINE 
+#PHONO : PHONO 
+#TUNER : TUNER 
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret apikey
+
+ota:
+  - platform: esphome
+    password: !secret otapassword
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "S3 Fallback Hotspot"
+    password: "LW3sCa2AIMTv"
+
+captive_portal:
+
+remote_transmitter:
+  pin: GPIO4  # IMPORTANT: Change this to the GPIO pin your IR LED is connected to.
+  
+  carrier_duty_percent: 50% # Standard for most IR protocols
+  # FIX: Assign a specific RMT channel to avoid conflicts with other components like addressable LEDs.
+  # On ESP32-S3, transmit channels are 0, 2, 4, 6.
+ 
+
+     
+#https://gist.github.com/TheGroundZero/74035123938ecb13c8864ff1e65dc4d3
+#	Button	Data	nbits    
+
+button:
+  - platform: restart
+    name: "Reboot Device"
+    entity_category: "diagnostic"
+    icon: "mdi:restart"
+
+ 
+
+ 
+
+# Define Home Assistant virtual buttons for control
+ 
+  - platform: template
+    name: "Pioneer Volume Up"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          carrier_frequency: 38000Hz
+          repeat: 2
+          code: [
+            8550, -4250, 550, -1575, 550, -525, 550, -1575,
+            550, -525, 550, -525, 525, -1600, 550, -525, 525, -1600,
+            550, -525, 525, -1600, 550, -525, 525, -1600, 550, -1575,
+            550, -525, 550, -1575, 550, -525, 550, -525, 525, -1600,
+            550, -525, 525, -1600, 550, -525, 525, -525, 550, -525,
+            550, -525, 525, -1600, 550, -525, 525, -1600, 550, -525,
+            525, -1600, 550, -1575, 550, -1600, 525, -1600, 550, -25450          ]
+
+  - platform: template
+    name: "Pioneer Volume Down"
+    on_press:
+      - remote_transmitter.transmit_raw:
+          carrier_frequency: 38000Hz
+          repeat: 2
+          code: [
+            8525, -4250, 550, -1600, 525, -550, 550, -1600, 525, -525,
+            550, -525, 550, -1575, 550, -525, 550, -1575, 550, -525,
+            550, -1575, 550, -525, 550, -1575, 550, -1600, 525, -525,
+            550, -1600, 525, -525, 550, -1600, 525, -1600, 550, -525,
+            525, -1600, 550, -525, 525, -525, 550, -525, 550, -525,
+            525, -525, 550, -525, 550, -1575, 550, -525, 550, -1575,
+            550, -1600, 525, -1600, 550, -1575, 550, -25425, 8525, -4250,
+            550, -1600, 525, -525          ]
+
+
+
+
+
+
+  - platform: template
+    name: "Pioneer power" #CU-SX148 power
+    on_press:
+      - remote_transmitter.transmit_raw:
+          carrier_frequency: 38000Hz
+          repeat: 2
+          code: [
+            8500, -4250, 550, -1600, 550, -550, 550, -1600, 550, -550,
+            550, -550, 550, -1600, 550, -550, 550, -1600, 550, -550,
+            550, -1600, 550, -550, 550, -1600, 550, -1600, 550, -550,
+            550, -1600, 550, -550, 550, -550, 550, -550, 550, -1575,
+            550, -1600, 550, -1600, 550, -550, 550, -550, 550, -550,
+            550, -1575, 550, -1600, 550, -550, 550, -550, 550, -550,
+            550, -1600, 550, -1575, 550, -1600, 550, -64000          ]
+
+ 
+ 
+  - platform: template
+    name: "Pioneer Mute" #"ja mute x305"    
+    on_press:
+      - remote_transmitter.transmit_raw:
+          repeat: 2
+          carrier_frequency: 40244Hz
+          code: [8473, -4249, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -521, 546, -1565, 546, -521, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -1565, 546, -1590, 521, -25320]
+
+
