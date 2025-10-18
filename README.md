@@ -51,7 +51,7 @@ A ready-to-use Python script is provided (`prontocode2yaml.py`) for creating new
 ## ❤️ Support the Project
 
 You’re free to use, modify, and share this code — no strings attached.
-If you enjoy this project or find it useful, please leave a **positive reply in the Home Assistant forum**. It helps others discover the project and keeps the community growing.
+If you enjoy this project or find it useful, please leave a **positive reply in the Home Assistant forum**. It helps others discover the project and keeps the community growing. (https://community.home-assistant.io/t/vintage-pioneer-stereo-amp-ir-and-prontocode-to-yaml/941546)
 
 ***
 
