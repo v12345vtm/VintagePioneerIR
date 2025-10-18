@@ -43,6 +43,7 @@ A ready-to-use Python script is provided (`prontocode2yaml.py`) for creating new
 - Define new button codes easily
 - Extend functionality for other amplifiers
 - No deep coding knowledge required
+- example of pronto IR codes : (https://www.remotecentral.com/cgi-bin/codes/pioneer/vs-x305_reciever/page-1/)
 
 ***
 
