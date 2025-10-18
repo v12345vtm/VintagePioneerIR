@@ -2,8 +2,10 @@ esphome:
   name: s3
   friendly_name: S3  
   
-  # S3  https://community-assets.home-assistant.io/original/4X/d/1/6/d16e13aa65ed79b1f334cbc189ba8fd55ac2c5d9.jpeg
-   #   worth mentioning https://gathering.tweakers.net/forum/list_messages/1531462
+# S3  https://community-assets.home-assistant.io/original/4X/d/1/6/d16e13aa65ed79b1f334cbc189ba8fd55ac2c5d9.jpeg
+#   worth mentioning https://gathering.tweakers.net/forum/list_messages/1531462
+#                    https://gist.github.com/TheGroundZero/74035123938ecb13c8864ff1e65dc4d3
+  
  
 #Pioneer a702r remote controls
 #TESTED OKAY ON a702r
@@ -12,11 +14,11 @@ esphome:
 #VOLUME — : Decreases the volume. 
 #MUTING : Press to reduce the sound —20 dB, and press again to return to the original volume level. 
 
-#TO BE TESTED #(INPUT SELECTOR buttons) 
-#TAPE 2 : TAPE 2 
-#TAPE 1 : TAPE 1/DAT 
+ 
+#TAPE 2 : TAPE 2 not tested 
+#TAPE 1 : TAPE 1/DAT not tested 
 #CD : CD 
-#LINE : LINE 
+#LINE : LINE  (AUX)
 #PHONO : PHONO 
 #TUNER : TUNER 
 
@@ -56,19 +58,12 @@ remote_transmitter:
   # On ESP32-S3, transmit channels are 0, 2, 4, 6.
  
 
-     
-#https://gist.github.com/TheGroundZero/74035123938ecb13c8864ff1e65dc4d3
-#	Button	Data	nbits    
 
 button:
   - platform: restart
     name: "Reboot Device"
     entity_category: "diagnostic"
     icon: "mdi:restart"
-
- 
-
- 
 
 # Define Home Assistant virtual buttons for control
  
@@ -107,11 +102,6 @@ button:
             550, -1600, 525, -1600, 550, -1575, 550, -25425, 8525, -4250,
             550, -1600, 525, -525          ]
 
-
-
-
-
-
   - platform: template
     name: "Power" #ja CU-SX148 power
     icon: "mdi:power"
@@ -129,9 +119,6 @@ button:
             550, -1575, 550, -1600, 550, -550, 550, -550, 550, -550,
             550, -1600, 550, -1575, 550, -1600, 550, -64000          ]
 
- 
- 
- 
 #button:
   - platform: template
     name:  "Mute"   #"ja mute x305"
@@ -142,6 +129,80 @@ button:
           repeat: 2
           carrier_frequency: 40244Hz
           code: [8473, -4249, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -521, 546, -1565, 546, -521, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -1565, 546, -1590, 521, -25320]
+    
+  - platform: template
+    name: "Pioneer Mute"
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat : 2
+          data: '0000 0067 0000 0022 0155 00ab 0015 0040 0016 0015 0015 0040 0016 0015 0015 0015 0016 0040 0015 0015 0016 0040 0015 0015 0016 0040 0015 0015 0016 0040 0015 0040 0016 0015 0015 0040 0016 0015 0015 0015 0016 0040 0015 0015 0016 0015 0016 003f 0016 0015 0016 0015 0015 0015 0016 0040 0015 0015 0016 0040 0015 0040 0016 0015 0015 0040 0016 003f 0016 0040 0015 03fb'
+
+  - platform: template
+    name: "nee mdtape1"
+    icon: "mdi:cassette"
+    id : tape1
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0066 0000 0022 0157 00ab 0016 003f 0016 0016 0016 
+            003f 0016 0016 0016 0016 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 
+            0016 0016 0016 003f 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 0016 
+            0016 0016 0016 0016 0016 0016 003f 0016 0016 0016 0016 0016 0016 0016 0016 0016 
+            003f 0016 003f 0016 003f 0016 0016 0016 003f 0016 003f 0016 003f 0016 03ff
+
+  - platform: template
+    name: "nee mdtape2"
+    id : tape2
+    icon: "mdi:cassette"
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0066 0000 0022 0157 00ab 0016 003f 0016 0016 0016 
+            003f 0016 0016 0016 0016 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 
+            0016 0016 0016 003f 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 0016 
+            0016 0016 0016 0016 0016 0016 003f 0016 0016 0016 0016 0016 0016 0016 0016 0016 
+            003f 0016 003f 0016 003f 0016 0016 0016 003f 0016 003f 0016 003f 0016 03ff
 
 
- 
+  - platform: template
+    name: "cd"  # "ja xls cd"
+    icon: "mdi:disc"
+    id : cd
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
+
+  - platform: template
+    name:  "line"  #"ja xls line" #aux xlsx
+    icon: "mdi:cable-data"
+    id : line_in
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
+
+  - platform: template
+    name: "Tuner" #"ja xlsx tuner"
+    icon: "mdi:radio"
+    id : tuner
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0016 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
+
+  - platform: template
+    name: "phono" #via xls bestand
+    icon: "mdi:album"
+    id : phono
+    on_press:
+      - remote_transmitter.transmit_pronto:
+          repeat: 2
+          data: >
+            0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
+
