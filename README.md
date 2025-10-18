@@ -60,6 +60,5 @@ If you enjoy this project or find it useful, please leave a **positive reply in 
 This project is released under the **MIT License**.
 
 ***
-
-Would you like me to make the README sound more technical (for developers) or more accessible (for vintage audio enthusiasts)?
+![Demo](https://github.com/v12345vtm/VintagePioneerIR/raw/main/pictures/demo.png)
 
