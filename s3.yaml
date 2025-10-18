@@ -5,6 +5,8 @@ esphome:
 # S3  https://community-assets.home-assistant.io/original/4X/d/1/6/d16e13aa65ed79b1f334cbc189ba8fd55ac2c5d9.jpeg
 #   worth mentioning https://gathering.tweakers.net/forum/list_messages/1531462
 #                    https://gist.github.com/TheGroundZero/74035123938ecb13c8864ff1e65dc4d3
+#   https://files.remotecentral.com/search/results/373856-1/index.html
+
   
  
 #Pioneer a702r remote controls
@@ -15,7 +17,7 @@ esphome:
 #MUTING : Press to reduce the sound —20 dB, and press again to return to the original volume level. 
 
  
-#TAPE 2 : TAPE 2 not tested 
+#TAPE 2 : TAPE 2 
 #TAPE 1 : TAPE 1/DAT not tested 
 #CD : CD 
 #LINE : LINE  (AUX)
@@ -68,7 +70,7 @@ button:
 # Define Home Assistant virtual buttons for control
  
   - platform: template
-    name:  "Volume up"  #"jaPioneer SX-205RDS Volume Up"
+    name:  "Volume Up"  #"jaPioneer SX-205RDS Volume Up"
     icon: "mdi:volume-plus"
     id : vol_up
     on_press:
@@ -145,29 +147,21 @@ button:
       - remote_transmitter.transmit_pronto:
           repeat: 2
           data: >
-            0000 0066 0000 0022 0157 00ab 0016 003f 0016 0016 0016 
-            003f 0016 0016 0016 0016 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 
-            0016 0016 0016 003f 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 0016 
-            0016 0016 0016 0016 0016 0016 003f 0016 0016 0016 0016 0016 0016 0016 0016 0016 
-            003f 0016 003f 0016 003f 0016 0016 0016 003f 0016 003f 0016 003f 0016 03ff
+            0000 006d 0000 0022 0155 00ac 0015 0040 0015 0015 0015 0040 0015 0015 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0015 0015 0015 0015 0040 0015 0015 0015 0015 0015 0015 0015 0015 0015 0040 0015 0040 0015 0040 0015 0015 0015 0040 0015 0040 0015 0040 0015 0594
 
   - platform: template
-    name: "nee mdtape2"
+    name: "Tape2"
     id : tape2
     icon: "mdi:cassette"
     on_press:
       - remote_transmitter.transmit_pronto:
           repeat: 2
           data: >
-            0000 0066 0000 0022 0157 00ab 0016 003f 0016 0016 0016 
-            003f 0016 0016 0016 0016 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 
-            0016 0016 0016 003f 0016 003f 0016 0016 0016 003f 0016 0016 0016 003f 0016 
-            0016 0016 0016 0016 0016 0016 003f 0016 0016 0016 0016 0016 0016 0016 0016 0016 
-            003f 0016 003f 0016 003f 0016 0016 0016 003f 0016 003f 0016 003f 0016 03ff
+            0000 006d 0000 0022 0155 00ac 0015 0040 0015 0015 0015 0040 0015 0015 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0015 0015 0040 0015 0040 0015 0040 0015 0015 0015 0015 0015 0015 0015 0015 0015 0040 0015 0015 0015 0015 0015 0015 0015 0040 0015 0040 0015 0040 0015 0594
 
 
   - platform: template
-    name: "cd"  # "ja xls cd"
+    name: "CD"  # "ja xls cd"
     icon: "mdi:disc"
     id : cd
     on_press:
@@ -177,7 +171,7 @@ button:
             0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
 
   - platform: template
-    name:  "line"  #"ja xls line" #aux xlsx
+    name:  "Line-in"  #"ja xls line" #aux xlsx
     icon: "mdi:cable-data"
     id : line_in
     on_press:
@@ -197,7 +191,7 @@ button:
             0000 0067 0000 0022 0158 00A6 0015 0041 0015 0016 0015 0041 0015 0016 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0016 0015 0041 0015 0016 0015 0041 0015 0041 0015 0041 0015 0016 0015 0016 0015 0016 0015 0041 0015 0016 0015 0016 0015 0016 0015 0016 0015 0041 0015 0041 0015 0041 0015 0016 0015 0041 0015 040F
 
   - platform: template
-    name: "phono" #via xls bestand
+    name: "Phono" #via xls bestand
     icon: "mdi:album"
     id : phono
     on_press:
