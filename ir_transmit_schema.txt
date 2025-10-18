@@ -1,0 +1,18 @@
+ v12345vtm : Vintage Pioneer Ir Schematic
+       ┌──────────────┐
+       │    ESP32     │
+       │              │
+       │   GPIO (Out) ├─────┐
+       └──────────────┘     │
+                            │
+                          ┌─┴─┐
+                          │1k │  Resistor
+                          └─┬─┘
+                            │
+                          ┌─┴─────┐
+                          │   \/  │Anode
+                          │  IR   │
+                          │  LED  │Cathode
+                          └──┬────┘
+                             │
+                            GND
