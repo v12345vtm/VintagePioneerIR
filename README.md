@@ -38,7 +38,7 @@ Many vintage Pioneer amplifiers have lost their original remote controls over ti
 
 ## 💻 Customize With Python
 
-A ready-to-use Python script is provided (`amp_buttons.py`) for creating new commands or supporting additional brands.
+A ready-to-use Python script is provided (`prontocode2yaml.py`) for creating new commands or supporting additional brands.
 
 - Define new button codes easily
 - Extend functionality for other amplifiers
