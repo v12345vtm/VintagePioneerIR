@@ -1,6 +1,7 @@
 esphome:
   name: s3
-  friendly_name: S3    
+  friendly_name: S3  
+  
   # S3  https://community-assets.home-assistant.io/original/4X/d/1/6/d16e13aa65ed79b1f334cbc189ba8fd55ac2c5d9.jpeg
    #   worth mentioning https://gathering.tweakers.net/forum/list_messages/1531462
  
@@ -72,7 +73,9 @@ button:
 # Define Home Assistant virtual buttons for control
  
   - platform: template
-    name: "Pioneer Volume Up"
+    name:  "Volume up"  #"jaPioneer SX-205RDS Volume Up"
+    icon: "mdi:volume-plus"
+    id : vol_up
     on_press:
       - remote_transmitter.transmit_raw:
           carrier_frequency: 38000Hz
@@ -87,7 +90,9 @@ button:
             525, -1600, 550, -1575, 550, -1600, 525, -1600, 550, -25450          ]
 
   - platform: template
-    name: "Pioneer Volume Down"
+    name: "Volume Down" #"jaPioneer SX-205RDS Volume Down"
+    icon: "mdi:volume-minus"
+    id : vol_min
     on_press:
       - remote_transmitter.transmit_raw:
           carrier_frequency: 38000Hz
@@ -108,7 +113,9 @@ button:
 
 
   - platform: template
-    name: "Pioneer power" #CU-SX148 power
+    name: "Power" #ja CU-SX148 power
+    icon: "mdi:power"
+    id : amp_power
     on_press:
       - remote_transmitter.transmit_raw:
           carrier_frequency: 38000Hz
@@ -124,8 +131,12 @@ button:
 
  
  
+ 
+#button:
   - platform: template
-    name: "Pioneer Mute" #"ja mute x305"    
+    name:  "Mute"   #"ja mute x305"
+    icon: "mdi:volume-off"
+    id : mute
     on_press:
       - remote_transmitter.transmit_raw:
           repeat: 2
@@ -133,3 +144,4 @@ button:
           code: [8473, -4249, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -521, 546, -1565, 546, -521, 546, -521, 521, -521, 546, -1590, 521, -521, 546, -1590, 521, -1590, 546, -521, 521, -1590, 546, -1565, 546, -1590, 521, -25320]
 
 
+ 
