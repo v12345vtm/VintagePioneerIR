@@ -1,0 +1,3 @@
+  ap:
+    ssid: "S3 Fallback Hotspot"
+    password: "LW3sCa2AIMTv"
